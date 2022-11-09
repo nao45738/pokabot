@@ -11,6 +11,7 @@ const TOKEN = process.env.BOT_TOKEN;
 const CLIENT_ID = process.env.CLIENT_ID;
 const GUILD_ID = process.env.GUILD_ID;
 const NAO_ID = process.env.GUILD_ID;
+const QUOTE_CHANNEL_ID = process.env.QUOTE_CHANNEL_ID;
 const QUOTE_REGEX = /"(.|\n)*"( ?\n?- ?)(\S(.|\n)*)/;
 
 const client = new Client({ intents: [
@@ -58,7 +59,7 @@ client.on('interactionCreate', (interaction) => {
 // quote only message in a specific channel
 client.on('messageCreate', (message) => {
     //console.log(message.type);
-    if(message.channelId === '1035712296456036374'){
+    if(message.channelId === QUOTE_CHANNEL_ID){
         if(message.content.match(QUOTE_REGEX)){ }
         else{
             message.delete();
