@@ -10,7 +10,7 @@ config();
 const TOKEN = process.env.BOT_TOKEN;
 const CLIENT_ID = process.env.CLIENT_ID;
 const GUILD_ID = process.env.GUILD_ID;
-const NAO_ID = '247878226972639232';
+const NAO_ID = process.env.GUILD_ID;
 const QUOTE_REGEX = /"(.|\n)*"( ?\n?- ?)(\S(.|\n)*)/;
 
 const client = new Client({ intents: [
