@@ -2,7 +2,7 @@ import { SlashCommandBuilder } from '@discordjs/builders';
 
 const pokaaddroleCommand = new SlashCommandBuilder()
     .setName('pokaaddrole')
-    .setDescription('Add a role')
+    .setDescription('Adds a role')
     .addRoleOption((option) => 
         option
             .setName('newrole')

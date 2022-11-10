@@ -35,7 +35,7 @@ client.on('ready', () => console.log(`${client.user.tag} has logged in`));
 
 client.on('interactionCreate', (interaction) => {
     if (interaction.isChatInputCommand()) {
-        //console.log(interaction.commandName);
+        console.log(interaction.options.getSubcommand());
 
         if(interaction.commandName === 'pokabear'){
             //console.log(interaction.options.get('describebear').value);
@@ -53,9 +53,17 @@ client.on('interactionCreate', (interaction) => {
 
         if(interaction.commandName === 'pokadum'){
             //console.log(interaction.options.getUser('user'));
-
             interaction.reply({ content: pokadumResponse(interaction.options.getUser('user').id, interaction.options.getUser('user'))});
+        }
 
+        if(interaction.commandName === 'pokaquotechannel'){
+            if(interaction.options.getSubcommand() === 'set'){
+
+            }else if (interaction.options.getSubcommand() === 'add'){
+
+            }else if (interaction.options.getSubcommand() === 'list'){
+                
+            }
         }
     }
 });
@@ -97,9 +105,12 @@ async function main() {
 
     const guildCommands = [
         PokaAnimeCommand,
+        PokaQuoteChannelCommand,
+    ];
+
+    const globalCommands = [
         PokaBearCommand,
         PokaDumCommand,
-        PokaQuoteChannelCommand,
     ];
 
     try {
@@ -107,6 +118,10 @@ async function main() {
         await rest.put(Routes.applicationGuildCommands(CLIENT_ID, GUILD_ID), {
             body: guildCommands,
         });
+
+        // await rest.put(Routes.applicationCommands(CLIENT_ID), {
+        //     body: globalCommands,
+        // });
 
         client.login(TOKEN);
 

@@ -2,7 +2,7 @@ import { SlashCommandBuilder } from '@discordjs/builders';
 
 const pokadumCommand = new SlashCommandBuilder()
     .setName('pokadum')
-    .setDescription('How dum is the user you tagged')
+    .setDescription('How dum is the user you tagged?')
     .addUserOption((option) => 
         option
             .setName('user')
