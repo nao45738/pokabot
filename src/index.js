@@ -4,14 +4,21 @@ import { REST } from '@discordjs/rest';
 import PokaAnimeCommand from './commands/poka-anime.js';
 import PokaBearCommand from './commands/poka-bear.js';
 import PokaDumCommand from './commands/poka-dum.js';
+import PokaQuoteChannelCommand from './commands/poka-quote-channel.js';
 
 config();
 
 const TOKEN = process.env.BOT_TOKEN;
+
 const CLIENT_ID = process.env.CLIENT_ID;
 const GUILD_ID = process.env.GUILD_ID;
-const NAO_ID = process.env.GUILD_ID;
+const NAO_ID = process.env.NAO_ID;
+const HUNNEH_ID = process.env.HUNNEH_ID
+const CJ_ID = process.env.CJ_ID;
+const PETER_ID = process.env.PETER_ID;
+const KEVIN_ID = process.env.KEVIN_ID;
 const QUOTE_CHANNEL_ID = process.env.QUOTE_CHANNEL_ID;
+
 const QUOTE_REGEX = /"(.|\n)*"( ?\n?- ?)(\S(.|\n)*)/;
 
 const client = new Client({ intents: [
@@ -47,28 +54,42 @@ client.on('interactionCreate', (interaction) => {
         if(interaction.commandName === 'pokadum'){
             //console.log(interaction.options.getUser('user'));
 
-            if(interaction.options.getUser('user').id === NAO_ID){
-                interaction.reply({ content: `hellow`});
-            }else{
-                interaction.reply({ content: `${interaction.options.getUser('user')} is dumdum.`});
-            }
+            interaction.reply({ content: pokadumResponse(interaction.options.getUser('user').id, interaction.options.getUser('user'))});
+
         }
     }
 });
 
 // quote only message in a specific channel
-client.on('messageCreate', (message) => {
-    //console.log(message.type);
-    if(message.channelId === QUOTE_CHANNEL_ID){
-        if(message.content.match(QUOTE_REGEX)){ }
-        else{
-            message.delete();
-            // but does not delete thread if message is thread starter
-            message.author.send("noooooooooo");
-            // TO-DO: explain how to start thread with picture of where to click + on mobile
-        }
+// client.on('messageCreate', (message) => {
+//     //console.log(message.type);
+//     if(message.channelId === QUOTE_CHANNEL_ID){
+//         if(message.content.match(QUOTE_REGEX)){ }
+//         else{
+//             message.delete();
+//             // but does not delete thread if message is thread starter
+//             message.author.send("noooooooooo");
+//             // TO-DO: explain how to start thread with picture of where to click + on mobile
+//         }
+//     }
+// });
+
+function pokadumResponse(userId, atUser) {
+
+    if(userId === NAO_ID){
+        return `${atUser} is a smort cookie <:peepoBlush:1040109437190422619>`
+    }else if(userId === HUNNEH_ID){
+        return `${atUser} is no dum, only a smart and precious fellow hooman <:peepoPat:959205730177667102> Also deserves everything gud in dis world <:uwu:807290399856918530>`
+    }else if(userId === CJ_ID){
+        return `${atUser} very dum, not even God can help them <:PepeHands:749493034365878294>`
+    }else if(userId === PETER_ID){
+        return `${atUser} is eeeeeeh decent smart/dum, but Selen will never notice them <:selenpain:1009278102716829806>`
+    }else if(userId === KEVIN_ID){
+        return `${atUser} is pretty smart, deserves to get a large sum of money and retire early <:widepeepoHappy:771380408590794803>`
+    }else{
+        return `${atUser} might or might not be dum, but you know they be a gud fren <:peepoBlonket:806749526667821069>`
     }
-});
+}
 
 async function main() {
 
@@ -78,6 +99,7 @@ async function main() {
         PokaAnimeCommand,
         PokaBearCommand,
         PokaDumCommand,
+        PokaQuoteChannelCommand,
     ];
 
     try {
